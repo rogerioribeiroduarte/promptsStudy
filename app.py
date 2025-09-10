@@ -20,5 +20,4 @@ def echo():
     answer_gemini = gemini.invoke(data["messages"][-1]["text"])
     return jsonify({"text": answer_gemini.content})
 
-# Inicia o Flask
-app.run(port=5000)
+port = int(os.environ.get("PORT", 5000)) 
