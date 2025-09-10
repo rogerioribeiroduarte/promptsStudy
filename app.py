@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from langchain.chat_models import init_chat_model
-from google.colab import userdata
 
 app = Flask(__name__)
 CORS(app)  # habilita CORS em todas as rotas
