@@ -19,5 +19,3 @@ def echo():
         return jsonify({"error": "Nenhum JSON recebido"}), 400
     answer_gemini = gemini.invoke(data["messages"][-1]["text"])
     return jsonify({"text": answer_gemini.content})
-
-port = int(os.environ.get("PORT", 5000)) 
