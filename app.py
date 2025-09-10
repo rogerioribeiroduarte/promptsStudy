@@ -8,11 +8,12 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # habilita CORS para todas as ro
 # Rota POST de exemplo
 @app.route("/", methods=["POST", "OPTIONS"])
 def echo():
+    if request.method == "OPTIONS":
+        # responde o preflight manualmente se precisar
+        return jsonify({"ok": True}), 200
     data = request.get_json()  # tenta ler JSON do corpo
     geminiKey = request.headers.get('authorization-google')
     model = request.headers.get('model0')
-    print(geminiKey)
-    print(model)
     gemini = init_chat_model(model=model, model_provider="google_genai", google_api_key=geminiKey)
     if not data:
         return jsonify({"error": "Nenhum JSON recebido"}), 400
