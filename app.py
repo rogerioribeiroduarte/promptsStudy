@@ -14,8 +14,19 @@ def echo():
     data = request.get_json()  # tenta ler JSON do corpo
     geminiKey = request.headers.get('authorization-google')
     model = request.headers.get('model0')
-    gemini = init_chat_model(model=model, model_provider="google_genai", google_api_key=geminiKey)
-    if not data:
-        return jsonify({"error": "Nenhum JSON recebido"}), 400
-    answer_gemini = gemini.invoke(data["messages"][-1]["text"])
-    return jsonify({"text": answer_gemini.content})
+
+    print(f"Header 'authorization-google' encontrado: {gemini_key_header}")
+    print(f"Header 'model0' encontrado: {model_header}")
+    
+    # Retorna uma resposta de sucesso para o teste
+    return jsonify({
+        "status": "teste de headers concluído",
+        "authorization-google-received": gemini_key_header is not None,
+        "model0-received": model_header is not None
+    }), 200
+    
+    # gemini = init_chat_model(model=model, model_provider="google_genai", google_api_key=geminiKey)
+    # if not data:
+    #     return jsonify({"error": "Nenhum JSON recebido"}), 400
+    # answer_gemini = gemini.invoke(data["messages"][-1]["text"])
+    # return jsonify({"text": answer_gemini.content})
