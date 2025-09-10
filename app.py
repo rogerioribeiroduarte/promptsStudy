@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # habilita CORS para todas as rotas
 
 # Rota POST de exemplo
-@app.route("/", methods=["POST"])
+@app.route("/", methods=["POST", "OPTIONS"])
 def echo():
     data = request.get_json()  # tenta ler JSON do corpo
     geminiKey = request.headers.get('authorization-google')
